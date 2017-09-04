@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Boerman.Core</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Corstian Boerman</authors>
+    <owners>Corstian Boerman</owners>
+    <!--<licenseUrl></licenseUrl>
+    <projectUrl></projectUrl>
+    <iconUrl></iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Boerman Core package which contains handy utilities for all kinds of projects.</description>
+    <releaseNotes>Removed some unused and needless code.</releaseNotes>
+    <copyright>Copyright (C) Corstian Boerman 2017</copyright>
+    <tags>Boerman Core Package</tags>
+  </metadata>
+</package>
