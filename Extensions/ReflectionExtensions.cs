@@ -83,6 +83,13 @@ namespace Boerman.Core.Extensions
             return Activator.CreateInstance(type);
         }
 
+        public static bool HasPArameterlessConstructor(this Type type)
+        {
+            ConstructorInfo cInfo = type.GetConstructor(null);
+
+            return cInfo != null;
+        }
+
         /// <summary>
         /// Creates a new instance of the provided type with the provided parameters as constructor parameters and returns the object.
         /// </summary>

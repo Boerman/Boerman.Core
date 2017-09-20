@@ -90,6 +90,8 @@ namespace Boerman.Core.State
                     {
                         //Logger.Error(ex, $"Context has ended due to exception in state {_currentState.GetType().Name}");
                         IsQueueRunning = false;
+                        _cancellationToken = default(CancellationToken);
+                        WaitForIdleProcess.Set();
                         return;
                     }
                 }
