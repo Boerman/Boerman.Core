@@ -82,13 +82,10 @@ namespace Boerman.Core.State
                         _stateQueue.TryDequeue(out Type enqueuedState);
                         _currentState = enqueuedState.CreateInstance<BaseState>(this);
 
-                        //Logger.Trace($"Starting execution for {_currentState.GetType().Name}");
                         await _currentState.Run();
-                        //Logger.Trace($"Execution finished for {_currentState.GetType().Name}");
                     }
                     catch (Exception ex)
                     {
-                        //Logger.Error(ex, $"Context has ended due to exception in state {_currentState.GetType().Name}");
                         IsQueueRunning = false;
                         _cancellationToken = default(CancellationToken);
                         WaitForIdleProcess.Set();
@@ -97,14 +94,7 @@ namespace Boerman.Core.State
                 }
 
                 IsQueueRunning = false;
-
-                //Logger.Trace(StateQueueContainsStates
-                //    ? "Context has ended due to cancellation"
-                //    : "Context has ended because no next state has been defined");
-                
-                // Basically invalidate the cancellationtoken
                 _cancellationToken = default(CancellationToken);
-
                 WaitForIdleProcess.Set();
             }, null);
         }
