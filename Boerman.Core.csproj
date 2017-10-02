@@ -2,12 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Corstian Boerman</Authors>
+    <Company>the Boerman Company</Company>
+    <PackageProjectUrl>https://github.com/Boerman/Boerman.Core</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Boerman/Boerman.Core</RepositoryUrl>
+    <Copyright>Copyright (C) Corstian Boerman 2017</Copyright>
+    <PackageTags>Boerman Core Package</PackageTags>
+    <Version>2.0.1</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Helpers\DynamicLinq.cs" />
-  </ItemGroup>
+
 </Project>

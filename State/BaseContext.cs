@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
-using Boerman.Core.Extensions;
+using Boerman.Core.Reflection;
 
 namespace Boerman.Core.State
 {
@@ -54,8 +54,6 @@ namespace Boerman.Core.State
         
         public BaseContext QueueState(Type state)
         {
-            //Logger.Trace($"{state.Name} queued");
-            
             if (!state.IsSubclassOf(typeof(BaseState))) throw new ArgumentException(nameof(state));
             _stateQueue.Enqueue(state);
 
@@ -84,7 +82,7 @@ namespace Boerman.Core.State
 
                         await _currentState.Run();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         IsQueueRunning = false;
                         _cancellationToken = default(CancellationToken);
