@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Boerman.Core.Extensions;
+using Boerman.Core.Reflection;
 
 namespace Boerman.Core.Helpers
 {

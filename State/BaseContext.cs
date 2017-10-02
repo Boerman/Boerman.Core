@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
-using Boerman.Core.Extensions;
+using Boerman.Core.Reflection;
 
 namespace Boerman.Core.State
 {
@@ -54,8 +54,6 @@ namespace Boerman.Core.State
         
         public BaseContext QueueState(Type state)
         {
-            //Logger.Trace($"{state.Name} queued");
-            
             if (!state.IsSubclassOf(typeof(BaseState))) throw new ArgumentException(nameof(state));
             _stateQueue.Enqueue(state);
 
@@ -82,13 +80,10 @@ namespace Boerman.Core.State
                         _stateQueue.TryDequeue(out Type enqueuedState);
                         _currentState = enqueuedState.CreateInstance<BaseState>(this);
 
-                        //Logger.Trace($"Starting execution for {_currentState.GetType().Name}");
                         await _currentState.Run();
-                        //Logger.Trace($"Execution finished for {_currentState.GetType().Name}");
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        //Logger.Error(ex, $"Context has ended due to exception in state {_currentState.GetType().Name}");
                         IsQueueRunning = false;
                         _cancellationToken = default(CancellationToken);
                         WaitForIdleProcess.Set();
@@ -97,14 +92,7 @@ namespace Boerman.Core.State
                 }
 
                 IsQueueRunning = false;
-
-                //Logger.Trace(StateQueueContainsStates
-                //    ? "Context has ended due to cancellation"
-                //    : "Context has ended because no next state has been defined");
-                
-                // Basically invalidate the cancellationtoken
                 _cancellationToken = default(CancellationToken);
-
                 WaitForIdleProcess.Set();
             }, null);
         }

@@ -1,4 +1,4 @@
-namespace Boerman.Core.Helpers
+namespace Boerman.Core.Spatial
 {
     /// <summary>
     /// ThreePointVector

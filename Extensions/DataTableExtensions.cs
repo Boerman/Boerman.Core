@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Dynamic;
 
@@ -8,7 +9,8 @@ namespace Boerman.Core.Extensions
     {
         public static IEnumerable<dynamic> AsDynamicEnumerable(this DataTable table)
         {
-            return table.AsEnumerable().Select(row => new DynamicRow(row));
+            throw new NotImplementedException();
+            //return table.AsEnumerable().Select(row => new DynamicRow(row));
         }
 
         private sealed class DynamicRow : DynamicObject

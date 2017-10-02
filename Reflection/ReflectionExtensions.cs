@@ -5,7 +5,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 
-namespace Boerman.Core.Extensions
+namespace Boerman.Core.Reflection
 {
     public static class ReflectionExtensions
     {

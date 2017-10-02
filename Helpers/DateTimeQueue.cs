@@ -264,7 +264,7 @@ namespace Boerman.Core.Helpers
         // class around the queue - the caller must not use references to the
         // original queue.
         // 
-        [HostProtection(Synchronization = true)]
+        //[HostProtection(Synchronization = true)]
         public static DateTimeQueue<T> Synchronized(DateTimeQueue<T> queue)
         {
             if (queue == null)
