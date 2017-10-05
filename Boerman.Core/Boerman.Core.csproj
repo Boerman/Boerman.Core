@@ -10,6 +10,7 @@
     <PackageTags>Boerman Core Package</PackageTags>
     <Version>2.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>This library contains utilities which are fairly generic. This library is being used as a dependency for most of the other Boerman packages.</Description>
   </PropertyGroup>
 
   <ItemGroup>
