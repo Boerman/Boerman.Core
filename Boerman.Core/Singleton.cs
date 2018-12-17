@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using Boerman.Core.Extensions;
 using Boerman.Core.Reflection;
 
 namespace Boerman.Core
