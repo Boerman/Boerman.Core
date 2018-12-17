@@ -21,5 +21,20 @@ namespace Boerman.Core.Extensions
 
             return 1;
         }
+
+        public static object IfThen(this object target, object ifThis, object thenThat)
+        {
+            return target == ifThis ? thenThat : target;
+        }
+        
+        public static T IfThen<T>(this T target, Func<T, bool> predicate, T thenThis)
+        {
+            return predicate.Invoke(target) ? thenThis : target;
+        }
+
+        public static object IfThen(this object target, Func<object, bool> predicate, object thenThis)
+        {
+            return predicate.Invoke(target) ? thenThis : target;
+        }
     }
 }

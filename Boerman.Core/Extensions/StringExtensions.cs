@@ -12,7 +12,7 @@ namespace Boerman.Core.Extensions
         public static byte[] GetBytes(this string str)
         {
             byte[] bytes = new byte[str.Length * sizeof(char)];
-            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
             return bytes;
         }
 
@@ -30,7 +30,7 @@ namespace Boerman.Core.Extensions
         public static string GetString(this byte[] bytes)
         {
             char[] chars = new char[bytes.Length / sizeof(char)];
-            System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+            Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
             return new string(chars);
         }
 
@@ -76,12 +76,6 @@ namespace Boerman.Core.Extensions
             return stream;
         }
 
-        [Obsolete("Yo fucker use the `GetBytes` extension method")]
-        public static byte[] ToByteArray(this string str)
-        {
-            return str.GetBytes();
-        }
-
         public static string ToText(this double degree, bool useFullText = false)
         {
             int val = (int)((degree / 22.5) + .5);
@@ -91,16 +85,42 @@ namespace Boerman.Core.Extensions
 
             return useFullText ? longText[val%16] : shortText[val % 16];
         }
-        
-        public static string Join(this string[] arr, string separator)
+
+        /// <summary>
+        /// Extension method that wraps the <see cref="string.Join(string, IEnumerable{string})"/> method.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
+        public static string Join(this IEnumerable<string> values, string separator)
         {
-            return String.Join(separator, arr);
+            return String.Join(separator, values);
         }
 
-        public static string Hash(this string str)
+        /// <summary>
+        /// Creates the a cryptographic hash of a given string.
+        /// </summary>
+        /// <param name="str">The string to hash</param>
+        /// <param name="algorithm">The hashing algorithm to use. By default MD5 hashing is being used.</param>
+        /// <returns></returns>
+        public static string Hash(this string str, HashAlgorithm algorithm = null)
         {
-            HashAlgorithm algorithm = MD5.Create();  //or use SHA256.Create();
+            if (algorithm == null) algorithm = MD5.Create();
+
             return algorithm.ComputeHash(str.GetBytes()).GetString();
+        }
+
+        /// <summary>
+        /// Extension methods that return an alternate value if the first predicate is true.
+        /// Usefull for ETL processes.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="ifThis"></param>
+        /// <param name="thenThat"></param>
+        /// <returns></returns>
+        public static string IfThen(this string target, string ifThis, string thenThat)
+        {
+            return target == ifThis ? thenThat : target;
         }
     }
 }

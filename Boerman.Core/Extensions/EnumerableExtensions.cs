@@ -44,6 +44,14 @@ namespace Boerman.Core.Extensions
             enumerable.ToList().ForEach(action);
         }
 
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Func<T, T> func)
+        {
+            foreach (var e in enumerable)
+            {
+                yield return func(e);
+            }
+        }
+
         public static T RandomElement<T>(this IEnumerable<T> enumerable)
         {
             return enumerable.RandomElementUsing(new Random());
