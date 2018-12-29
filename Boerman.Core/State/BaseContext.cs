@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Boerman.Core.Extensions;
+using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
-using Boerman.Core.Reflection;
 
 namespace Boerman.Core.State
 {
@@ -54,7 +54,7 @@ namespace Boerman.Core.State
         /// 
         /// Usage of this field in production is discouraged. See documentation for the recommended way to interact with the state machine.
         /// </summary>
-        public Func<bool> WaitForIdleProcess => _waitForIdleProcess.WaitOne;
+        protected Func<bool> WaitForIdleProcess => _waitForIdleProcess.WaitOne;
 
         private CancellationToken _cancellationToken;
 
@@ -65,12 +65,12 @@ namespace Boerman.Core.State
         /// 
         /// In order to wait for completion, see the <seealso cref="WaitForIdleProcess"/> field.
         /// </summary>
-        public bool IsQueueRunning
+        protected bool IsQueueRunning
         {
             get {
                 return _isQueueRunning;
             }
-            protected set
+            set
             {
                 lock (_queueRunningLock)
                 {
@@ -89,7 +89,7 @@ namespace Boerman.Core.State
         /// </summary>
         /// <param name="state">The type of the state. The type should be derived from <see cref="BaseState"/>.</param>
         /// <returns></returns>
-        public BaseContext QueueState(Type state)
+        protected BaseContext QueueState(Type state)
         {
             if (!state.IsSubclassOf(typeof(BaseState))) throw new ArgumentException(nameof(state));
             _stateQueue.Enqueue(state);
@@ -103,7 +103,7 @@ namespace Boerman.Core.State
         /// Signal the context to start processing states.
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> which can be used to stop the context in processing it's enqueued states.</param>
-        public void Run(CancellationToken cancellationToken = default(CancellationToken))
+        protected void Run(CancellationToken cancellationToken = default(CancellationToken))
         {
             if (IsQueueRunning) return;
             IsQueueRunning = true;

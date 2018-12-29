@@ -60,7 +60,7 @@ namespace Boerman.Core.Tests
                 "c"
             };
 
-            var result = enumerable.Join(", ");
+            var result = string.Join(", ", enumerable);
 
             Assert.AreEqual(result, "a, b, c");
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
@@ -88,7 +89,7 @@ namespace Boerman.Core.Helpers
                 props.Add(item.Key, item.Value.ToString());
             }
 
-            return props.OrderBy(q => q.Key).Select(q => $"{q.Key}: {q.Value}").Join("\r\n");
+            return string.Join("\r\n", props.OrderBy(q => q.Key).Select(q => $"{q.Key}: {q.Value}"));
         }
     }
 }
