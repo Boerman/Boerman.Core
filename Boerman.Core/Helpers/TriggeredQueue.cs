@@ -1,6 +1,8 @@
 ﻿// Thanks to https://gist.github.com/jsauve/b2e8496172fdabd370c4
+// With some changes to use a concurrent queue
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Boerman.Core.EventArgs;
 
@@ -14,7 +16,7 @@ namespace Boerman.Core.Helpers
         /// <summary>
         /// The internal queue.
         /// </summary>
-        readonly Queue<T> queue = new Queue<T>();
+        readonly ConcurrentQueue<T> queue = new ConcurrentQueue<T>();
 
         /// <summary>
         /// Occurs immediately before an item is enqueued. Provides peek access to the queue before enqueueuing.
@@ -81,9 +83,9 @@ namespace Boerman.Core.Helpers
         /// <param name="item">Item.</param>
         public virtual void Enqueue(T item)
         {
-            T peekItem;
+            T peekItem = default(T);
 
-            try { peekItem = queue.Peek(); }
+            try { queue.TryPeek(out peekItem); }
             catch (InvalidOperationException) { peekItem = (default(T)); }
 
             OnWillEnqueue(peekItem, item);
@@ -98,16 +100,18 @@ namespace Boerman.Core.Helpers
         /// </summary>
         public virtual T Dequeue()
         {
-            T peekItem;
+            T peekItem = default(T);
 
-            try { peekItem = queue.Peek(); }
+            try { queue.TryPeek(out peekItem); }
             catch (InvalidOperationException) { peekItem = (default(T)); }
 
             OnWillDequeue(peekItem);
 
-            T dequeuedItem = queue.Dequeue();
+            T dequeuedItem = default(T);
 
-            try { peekItem = queue.Peek(); }
+            queue.TryDequeue(out dequeuedItem);
+
+            try { queue.TryPeek(out peekItem); }
             catch (InvalidOperationException) { peekItem = (default(T)); }
 
             OnDidDequeue(dequeuedItem, peekItem);
