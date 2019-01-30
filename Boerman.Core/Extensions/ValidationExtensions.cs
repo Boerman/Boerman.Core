@@ -2,7 +2,7 @@
 
 namespace Boerman.Core.Extensions
 {
-    public static class ValidationExtensions
+    public static partial class Extensions
     {
         public static void ThrowWhenFalse(this bool b)
         {

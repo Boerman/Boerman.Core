@@ -5,7 +5,7 @@ using System.Dynamic;
 
 namespace Boerman.Core.Extensions
 {
-    public static class DataTableExtensions
+    public static partial class Extensions
     {
         public static IEnumerable<dynamic> AsDynamicEnumerable(this DataTable table)
         {

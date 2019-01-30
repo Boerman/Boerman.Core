@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Boerman.Core.Extensions
 {
-    public static class EnumerableExtensions
+    public static partial class Extensions
     {
         public static IEnumerable<T> All<T>(this IEnumerator<T> enumerator)
         {

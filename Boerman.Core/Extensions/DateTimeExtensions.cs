@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Boerman.Core.Extensions
 {
-    public static class DateTimeExtensions
+    public static partial class Extensions
     {
         public static int ToUnixTime(this DateTime dateTime)
         {

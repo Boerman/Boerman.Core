@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace Boerman.Core.Extensions
 {
-    public static class StringExtensions
+    public static partial class Extensions
     {
         public static byte[] GetBytes(this string str)
         {
@@ -82,6 +82,15 @@ namespace Boerman.Core.Extensions
             return str.GetBytes();
         }
 
+
+        // See https://stackoverflow.com/a/7490772/1720761 for more information about the calculation
+        /// <summary>
+        /// This method will return a text based representation based on a double which represents a heading.
+        /// Note that there is a maximum deviation of 11.25 degrees relative to the text representation of the heading returned.
+        /// </summary>
+        /// <returns>Text based representation of the heading</returns>
+        /// <param name="degree">Heading in degrees</param>
+        /// <param name="useFullText">If set to <c>true</c> use full text.</param>
         public static string ToText(this double degree, bool useFullText = false)
         {
             int val = (int)((degree / 22.5) + .5);
@@ -89,7 +98,22 @@ namespace Boerman.Core.Extensions
             var shortText = new[] { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW" };
             var longText = new[] { "North", "North-northeast", "Northeast", "East-northeast", "East", "East-southeast", "Southeast", "South-southeast", "South", "South-southwest", "Southwest", "West-southwest", "West", "West-northwest", "Northwest", "North-northwest" };
 
-            return useFullText ? longText[val%16] : shortText[val % 16];
+            return useFullText ? longText[val % 16] : shortText[val % 16];
+        }
+
+        /// <summary>
+        /// This method will return an arrow based on a double number which represents a heading.
+        /// Note that this has a maximum deviation of 22.5 degrees relative to the arrow displayed.
+        /// </summary>
+        /// <returns>An arrow indicating the heading</returns>
+        /// <param name="degree">Heading in degrees</param>
+        public static string ToStringArrow(this double degree)
+        {
+            int val = (int)((degree / 45) + .5);
+
+            var arrows = new[] { "↑", "↗", "→", "↘", "↓", "↙", "←", "↖" };
+
+            return arrows[val % 8];
         }
         
         public static string Join(this string[] arr, string separator)

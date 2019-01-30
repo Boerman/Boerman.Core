@@ -11,6 +11,13 @@
     <Version>2.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>This library contains utilities which are fairly generic. This library is being used as a dependency for most of the other Boerman packages.</Description>
+    <PackageVersion>2.0.2</PackageVersion>
+    <PackageIconUrl>https://avatars2.githubusercontent.com/u/25320889</PackageIconUrl>
+    <Owners>Corstian Boerman</Owners>
+    <PackageReleaseNotes>Added some helper methods</PackageReleaseNotes>
+    <Summary>The Boerman.Core package contains some generic helpers which come handy in a variety of projects.</Summary>
+    <Title>Boerman.Core</Title>
+    <PackageId>Boerman.Core</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

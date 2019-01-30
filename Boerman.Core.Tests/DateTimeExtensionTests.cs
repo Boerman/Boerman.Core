@@ -28,7 +28,7 @@ namespace Boerman.Core.Tests
         [TestMethod]
         public void DateTimeFromUnixTime()
         {
-            var result = DateTimeExtensions.FromUnixTime(1490108400);
+            var result = Extensions.Extensions.FromUnixTime(1490108400);
 
             Assert.AreEqual(DateTime.Parse("Tue, 21 Mar 2017 14:00:00 GMT"), result);
         }

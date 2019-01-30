@@ -2,7 +2,7 @@
 
 namespace Boerman.Core.Extensions
 {
-    public static class TimerExtensions
+    public static partial class Extensions
     {
         public static void Reset(this Timer timer)
         {

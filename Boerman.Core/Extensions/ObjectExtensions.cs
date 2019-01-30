@@ -6,7 +6,7 @@ using System;
 
 namespace Boerman.Core.Extensions
 {
-    public static class ObjectExtensions
+    public static partial class Extensions
     {
         /// <returns>1 for equal. 0 when unable to determine equality. -1 with an inequality.</returns>
         public static int CompareWith<T>(this T o1, T o2) where T : class

@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Boerman.Core.Extensions
 {
-    public static class CancellationTokenExtensions
+    public static partial class Extensions
     {
         public static bool WaitCancellationRequested(
             this CancellationToken token,

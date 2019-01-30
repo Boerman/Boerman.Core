@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace Boerman.Core.Extensions
 {
-    public static class CollectionExtensions
+    public static partial class Extensions
     {
         public static void AddRange<T>(this ICollection<T> destination,
             IEnumerable<T> source)

@@ -76,6 +76,7 @@ namespace Boerman.Core.Reflection
                             // When some error is catched it maybe means the property value in the source object is null.
 
                             // Well, there's so much which could've gone wrong when you're at this point...
+                            throw;
                         }
                     }
                 }
